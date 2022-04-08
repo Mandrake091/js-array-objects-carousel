@@ -35,10 +35,10 @@ const thumbnails = document.getElementsByClassName('thumbnail');
 
 let buttonStop = document.getElementById('stop').addEventListener('click', stop);
 function stop() {
-    window.clearInterval(myInterval);
+    clearInterval(myInterval);
 }
-let buttonPlay = document.getElementById('play').addEventListener('click', play);
 
+let buttonPlay = document.getElementById('play').addEventListener('click', play);
 function play() {
     myInterval = setInterval(next, 4000);
 }

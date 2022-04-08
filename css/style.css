@@ -3,19 +3,16 @@
     margin: 0;
     box-sizing: border-box;
 }
-
 body {
     background-color: rgb(44, 44, 44);
     color: antiquewhite;
 }
-
 #app {
     width: 100vw;
     height: 100vh;
 }
 
 .thumbnail {
-
     filter: brightness(60%);
 }
 
@@ -24,11 +21,9 @@ body {
 }
 
 .items {
-   
     text-align: right;
     position: relative;
     display: none;
-
 }
 
 .title {

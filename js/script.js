@@ -95,32 +95,39 @@ for (let i = 0; i < itemCards.length; i++) {
 
 }
 
-//let firstItem = document.querySelector(".items").classList.add("active");
+let buttonPlay = document.getElementById('play').addEventListener('click', play);
+
+function play() {
+    myInterval = setInterval(next, 1000);
+}
 
 nextButton.addEventListener("click", next);
-//myInterval = setInterval(next, 5000);
 
 function next() {
+
     thumbnails[currentIndex].classList.remove("active");
     items[currentIndex].classList.remove("active");
     if (currentIndex === 4) {
         currentIndex = 0;
         items[currentIndex].classList.remove("d-none");
         items[currentIndex].classList.add("active");
+
     } else {
-        items[currentIndex].classList.add("d-none");
         currentIndex++;
         items[currentIndex].classList.remove("d-none");
         items[currentIndex].classList.add("active");
     }
     thumbnails[currentIndex].classList.add("active");
-  
 };
 
+let buttonStop = document.getElementById('stop').addEventListener('click', stop)
 
+function stop() {
+    clearInterval(myInterval)
+}
 
 prevButton.addEventListener('click', function () {
-    //clearInterval(myInterval)
+
     if (currentIndex > 0) {
 
         thumbnails[currentIndex].classList.remove("active");

@@ -37,10 +37,10 @@ let buttonStop = document.getElementById('stop').addEventListener('click', stop)
 function stop() {
     window.clearInterval(myInterval);
 }
-
 let buttonPlay = document.getElementById('play').addEventListener('click', play);
+
 function play() {
-    myInterval = setInterval(next, 2000);
+    myInterval = setInterval(next, 4000);
 }
 
 let prevButton = document.getElementById('prevButton').addEventListener('click',  prev);

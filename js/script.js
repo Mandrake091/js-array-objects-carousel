@@ -1,28 +1,3 @@
-// const imagesArray = [
-//     './img/01.jpg',
-//     './img/02.jpg',
-//     './img/03.jpg',
-//     './img/04.jpg',
-//     './img/05.jpg'
-// ];
-
-// const titlesArray = [
-//     'Svezia',
-//     'Svizzera',
-//     'Gran Bretagna',
-//     'Germania',
-//     'Paradise'
-// ]
-
-// const text = [
-//     'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Et temporibus voluptatum suscipit tempore aliquid deleniti aut veniam inventore eligendi ex ad ullam, cumque provident totam omnis, magnam dolores dolorum corporis.',
-//     'Lorem ipsum',
-//     'Lorem ipsum, dolor sit amet consectetur adipisicing elit.',
-//     'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Et temporibus voluptatum suscipit tempore aliquid deleniti aut veniam inventore eligendi ex ad ullam,',
-//     'Et temporibus voluptatum suscipit tempore aliquid deleniti aut veniam inventore eligendi ex ad ullam,',
-// ]
-
-
 const itemCards = [{
         img: './img/01.jpg',
         title: 'Svezia',
@@ -52,40 +27,63 @@ const itemCards = [{
     }
 ];
 
-console.log(itemCards)
-
-let prevButton = document.getElementById('prevButton');
-let nextButton = document.getElementById('nextButton')
 let itemActive = document.getElementById('active');
 let thumbContainer = document.getElementById('thumbContainer');
 let items = document.getElementsByClassName('items');
 const itemsContainer = document.getElementById('items-container');
 const thumbnails = document.getElementsByClassName('thumbnail');
 
+let buttonStop = document.getElementById('stop').addEventListener('click', stop);
+function stop() {
+    window.clearInterval(myInterval);
+}
 
+let buttonPlay = document.getElementById('play').addEventListener('click', play);
+function play() {
+    myInterval = setInterval(next, 2000);
+}
+
+let prevButton = document.getElementById('prevButton').addEventListener('click',  prev);
+function prev(){
+    if (currentIndex > 0) {
+        thumbnails[currentIndex].classList.remove("active");
+        items[currentIndex].classList.add("d-none");
+        items[currentIndex].classList.remove("active");
+        currentIndex--;
+        thumbnails[currentIndex].classList.add("active");
+        items[currentIndex].classList.remove("d-none");
+        items[currentIndex].classList.add("active");
+    }
+}
+let nextButton = document.getElementById('nextButton').addEventListener("click", next);
+function next() {
+    thumbnails[currentIndex].classList.remove("active");
+    items[currentIndex].classList.remove("active");
+    if (currentIndex === 4) {
+        currentIndex = 0;
+        items[currentIndex].classList.remove("d-none");
+        items[currentIndex].classList.add("active");
+    } else {
+        currentIndex++;
+        items[currentIndex].classList.remove("d-none");
+        items[currentIndex].classList.add("active");
+    }
+    thumbnails[currentIndex].classList.add("active");
+};
 
 let currentIndex = 0;
-
 for (let i = 0; i < itemCards.length; i++) {
-
     let classActive = "";
-
     if (i === currentIndex) {
         classActive = "active"
     }
-
     itemsContainer.innerHTML += `<div class="items ${classActive} ">
-                                    <img src="${itemCards[i].img}">
-                                    <div class="container">
-                                    <div class="row justify-content-center align-items-center">
-                                    <div class="col-12">
+                                    <img  src="${itemCards[i].img}">
                                         <div class="title">
                                             <h2 class="h2">${itemCards[i].title}</h2>
                                             <p class="text">${itemCards[i].text}.</p>
-                                    </div>
-                                    </div>
-                                    </div>    
-                                    </div>`
+                                        </div>
+                                </div>`
 
 
     thumbContainer.innerHTML += `<div class= "thumbnail ${classActive}">
@@ -95,50 +93,7 @@ for (let i = 0; i < itemCards.length; i++) {
 
 }
 
-let buttonPlay = document.getElementById('play').addEventListener('click', play);
 
-function play() {
-    myInterval = setInterval(next, 1000);
-}
 
-nextButton.addEventListener("click", next);
 
-function next() {
 
-    thumbnails[currentIndex].classList.remove("active");
-    items[currentIndex].classList.remove("active");
-    if (currentIndex === 4) {
-        currentIndex = 0;
-        items[currentIndex].classList.remove("d-none");
-        items[currentIndex].classList.add("active");
-
-    } else {
-        currentIndex++;
-        items[currentIndex].classList.remove("d-none");
-        items[currentIndex].classList.add("active");
-    }
-    thumbnails[currentIndex].classList.add("active");
-};
-
-let buttonStop = document.getElementById('stop').addEventListener('click', stop)
-
-function stop() {
-    clearInterval(myInterval)
-}
-
-prevButton.addEventListener('click', function () {
-
-    if (currentIndex > 0) {
-
-        thumbnails[currentIndex].classList.remove("active");
-        items[currentIndex].classList.add("d-none");
-        items[currentIndex].classList.remove("active");
-
-        currentIndex--;
-
-        thumbnails[currentIndex].classList.add("active");
-        items[currentIndex].classList.remove("d-none");
-        items[currentIndex].classList.add("active");
-    }
-
-});
